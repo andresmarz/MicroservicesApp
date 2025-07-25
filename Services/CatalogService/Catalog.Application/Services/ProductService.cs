@@ -32,5 +32,21 @@ namespace Catalog.Application.Services
                 Stock = p.Stock
             });
         }
+
+        public async Task<ProductDto?> GetByIdAsync(Guid id)
+        {
+            var p = await _repository.GetByIdAsync(id);
+            if (p == null) return null;
+
+            return new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Stock = p.Stock
+            };
+        }
+
     }
 }
