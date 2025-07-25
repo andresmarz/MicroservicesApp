@@ -62,5 +62,18 @@ namespace Catalog.Application.Services
             await _repository.AddAsync(product);
         }
 
+        public async Task UpdateAsync(Guid id, CreateProductDto dto)
+        {
+            var existing = await _repository.GetByIdAsync(id);
+            if (existing == null) return;
+
+            existing.Name = dto.Name;
+            existing.Description = dto.Description;
+            existing.Price = dto.Price;
+            existing.Stock = dto.Stock;
+
+            await _repository.UpdateAsync(existing);
+        }
+
     }
 }
