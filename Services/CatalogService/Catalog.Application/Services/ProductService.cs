@@ -48,5 +48,19 @@ namespace Catalog.Application.Services
             };
         }
 
+        public async Task AddAsync(CreateProductDto dto)
+        {
+            var product = new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = dto.Name,
+                Description = dto.Description,
+                Price = dto.Price,
+                Stock = dto.Stock
+            };
+
+            await _repository.AddAsync(product);
+        }
+
     }
 }
