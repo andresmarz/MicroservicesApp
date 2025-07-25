@@ -75,5 +75,9 @@ namespace Catalog.Application.Services
             await _repository.UpdateAsync(existing);
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            await _repository.DeleteAsync(id);
+        }
     }
 }
