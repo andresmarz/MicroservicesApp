@@ -14,7 +14,7 @@ namespace Catalog.Application.Services
     {
         private readonly IProductRepository _repository;
 
-        private ProductService(IProductRepository repository)
+        public ProductService(IProductRepository repository)
         {
             _repository = repository;
         }
