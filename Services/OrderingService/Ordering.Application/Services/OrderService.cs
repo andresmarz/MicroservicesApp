@@ -63,5 +63,18 @@ namespace Ordering.Application.Services
             await _repository.AddAsync(order);
         }
 
+        public async Task UpdateAsync(Guid id, CreateOrderDto dto)
+        {
+            var order = await _repository.GetByIdAsync(id);
+            if (order == null) return;
+
+            order.CustomerName = dto.CustomerName;
+            order.Product = dto.Product;
+            order.Quantity = dto.Quantity;
+            order.TotalPrice = dto.TotalPrice;
+
+            await _repository.UpdateAsync(order);
+        }
+
     }
 }
