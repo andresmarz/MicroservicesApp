@@ -31,11 +31,24 @@ namespace Ordering.Application.Services
                 Quantity = order.Quantity,
                 TotalPrice = order.TotalPrice,
                 OrderDate = order.OrderDate,
-            });
-
-                
-
-
+            });             
         }
+
+        public async Task<OrderDto?> GetByIdAsync(Guid id)
+        {
+            var order = await _repository.GetByIdAsync(id);
+            if (order == null) return null;
+
+            return new OrderDto
+            {
+                Id = order.Id,
+                CustomerName = order.CustomerName,
+                Product = order.Product,
+                Quantity = order.Quantity,
+                TotalPrice = order.TotalPrice,
+                OrderDate = order.OrderDate,
+            };
+        }
+
     }
 }
