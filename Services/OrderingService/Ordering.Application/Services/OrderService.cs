@@ -50,5 +50,18 @@ namespace Ordering.Application.Services
             };
         }
 
+        public async Task AddAsync(CreateOrderDto dto)
+        {
+            var order = new Order
+            {
+                CustomerName = dto.CustomerName,
+                Product = dto.Product,
+                Quantity = dto.Quantity,
+                TotalPrice = dto.TotalPrice,
+            };
+
+            await _repository.AddAsync(order);
+        }
+
     }
 }
