@@ -76,5 +76,10 @@ namespace Ordering.Application.Services
             await _repository.UpdateAsync(order);
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            await _repository.DeleteAsync(id);
+        }
+
     }
 }
