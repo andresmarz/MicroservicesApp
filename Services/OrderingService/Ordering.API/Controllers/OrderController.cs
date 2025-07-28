@@ -41,6 +41,12 @@ namespace Ordering.API.Controllers
             return CreatedAtAction(nameof(GetAll), null);           
         }
 
-
+        // POST: api/Order/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] CreateOrderDto dto)
+        {
+            await _orderService.UpdateAsync(id, dto);
+            return NoContent();
+        }
     }
 }
