@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ordering.Application.DTOs;
 using Ordering.Application.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace Ordering.API.Controllers
 {
@@ -41,11 +41,19 @@ namespace Ordering.API.Controllers
             return CreatedAtAction(nameof(GetAll), null);           
         }
 
-        // POST: api/Order/5
+        // PUT: api/Order/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] CreateOrderDto dto)
         {
             await _orderService.UpdateAsync(id, dto);
+            return NoContent();
+        }
+
+        // Delete: api/Order/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _orderService.DeleteAsync(id);
             return NoContent();
         }
     }
