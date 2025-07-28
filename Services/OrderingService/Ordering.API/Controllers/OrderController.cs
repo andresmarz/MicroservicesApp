@@ -23,5 +23,15 @@ namespace Ordering.API.Controllers
             return Ok(orders);
         }
 
+        // GET: api/Order/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var order = await _orderService.GetByIdAsync(id);
+            if (order == null) return NotFound();
+
+            return Ok(order);
+        }
+
     }
 }
