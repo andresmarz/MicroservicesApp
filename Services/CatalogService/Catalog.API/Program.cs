@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Configure EF Core with BD in Memory
+// Configure EF Core
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CatalogDbContext>(options =>
-    options.UseInMemoryDatabase("CatalogDb"));
+    options.UseSqlServer(connectionString));
 
 // Dependency Injection
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
