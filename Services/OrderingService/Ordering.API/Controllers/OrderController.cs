@@ -33,5 +33,14 @@ namespace Ordering.API.Controllers
             return Ok(order);
         }
 
+        // POST: api/Order
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateOrderDto dto)
+        {
+            await _orderService.AddAsync(dto);
+            return CreatedAtAction(nameof(GetAll), null);           
+        }
+
+
     }
 }
