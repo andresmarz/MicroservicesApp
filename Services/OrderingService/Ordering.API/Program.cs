@@ -1,3 +1,9 @@
+using Ordering.Application.Interfaces;
+using Ordering.Application.Services;
+using Ordering.Infrastructure.Data;
+using Ordering.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
