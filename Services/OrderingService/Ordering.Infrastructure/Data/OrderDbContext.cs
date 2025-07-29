@@ -8,9 +8,9 @@ using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Data
 {
-    public class OrderDbContext : DbContext
+    public class OrderingDbContext : DbContext
     {
-        public OrderDbContext(DbContextOptions<OrderDbContext> options) 
+        public OrderingDbContext(DbContextOptions<OrderingDbContext> options) 
             : base(options)
         {
 
