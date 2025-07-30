@@ -11,7 +11,7 @@ using Ordering.Domain.Interfaces;
 
 namespace Ordering.Application.Services
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
         private readonly IOrderRepository _repository;
 
