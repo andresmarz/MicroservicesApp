@@ -80,6 +80,5 @@ namespace Ordering.Application.Services
         {
             await _repository.DeleteAsync(id);
         }
-
     }
 }
