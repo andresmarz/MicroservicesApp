@@ -43,7 +43,7 @@ namespace Ordering.API.Controllers
 
         // PUT: api/Order/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] CreateOrderDto dto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] OrderDto dto)
         {
             await _orderService.UpdateAsync(id, dto);
             return NoContent();

@@ -54,16 +54,16 @@ namespace Ordering.Application.Services
         {
             var order = new Order
             {
-                CustomerName = dto.CustomerName,
-                Product = dto.Product,
+                Id = dto.Id,
                 Quantity = dto.Quantity,
-                TotalPrice = dto.TotalPrice,
+                CustomerName = dto.CustomerName                         
+                
             };
 
             await _repository.AddAsync(order);
         }
 
-        public async Task UpdateAsync(Guid id, CreateOrderDto dto)
+        public async Task UpdateAsync(Guid id, OrderDto dto)
         {
             var order = await _repository.GetByIdAsync(id);
             if (order == null) return;
