@@ -17,6 +17,13 @@ builder.Services.AddDbContext<OrderingDbContext>(options =>
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+//Registering an HttpClient
+builder.Services.AddHttpClient("Catalog", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5146/api/"); // base URL of CatalogService
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
