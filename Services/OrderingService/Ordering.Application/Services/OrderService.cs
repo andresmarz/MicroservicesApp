@@ -4,20 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+
+
 using Ordering.Application.DTOs;
 using Ordering.Application.Interfaces;
 using Ordering.Domain.Entities;
 using Ordering.Domain.Interfaces;
+using Ordering.Application.DTOs.External;
 
 namespace Ordering.Application.Services
 {
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _repository;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public OrderService(IOrderRepository repository)
+        public OrderService(IOrderRepository repository, IHttpClientFactory httpClientFactory)
         {
             _repository = repository;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<IEnumerable<OrderDto>> GetAllAsync()
@@ -50,17 +59,31 @@ namespace Ordering.Application.Services
             };
         }
 
+       
         public async Task AddAsync(CreateOrderDto dto)
         {
+            var client = _httpClientFactory.CreateClient("Catalog");
+
+            var response = await client.GetAsync($"product/{dto.Id}");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Producto no encontrado en CatalogService");
+
+            var product = await response.Content.ReadFromJsonAsync<ProductResponseDto>();
+
+            if (product == null || product.Stock < dto.Quantity)
+                throw new Exception("Producto no disponible o sin stock suficiente");
+
             var order = new Order
             {
-                Id = dto.Id,
+                CustomerName = dto.CustomerName,
+                Product = product.Name,
                 Quantity = dto.Quantity,
-                CustomerName = dto.CustomerName                         
-                
+                TotalPrice = product.Price * dto.Quantity,
+                OrderDate = DateTime.UtcNow
             };
 
             await _repository.AddAsync(order);
+                    
         }
 
         public async Task UpdateAsync(Guid id, OrderDto dto)

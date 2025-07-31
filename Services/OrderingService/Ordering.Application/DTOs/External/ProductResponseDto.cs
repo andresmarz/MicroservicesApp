@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalog.Application.DTOs
+namespace Ordering.Application.DTOs.External
 {
     public class ProductResponseDto
     {
