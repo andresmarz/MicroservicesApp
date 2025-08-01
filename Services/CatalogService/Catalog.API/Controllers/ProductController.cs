@@ -25,20 +25,13 @@ namespace Catalog.API.Controllers
 
         // GET: api/product/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<ActionResult<ProductDto>> GetById(Guid id)
         {
             var product = await _productService.GetByIdAsync(id);
             if (product == null)
                 return NotFound();
-
-            var dto = new ProductDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Price = product.Price
-            };
-
-            return Ok(dto);
+           
+            return Ok(product);
         }
 
         // POST: api/product

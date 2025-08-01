@@ -26,10 +26,8 @@ namespace Catalog.Application.Services
             return products.Select(p => new ProductDto
             {
                 Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                Stock = p.Stock
+                Name = p.Name,                
+                Price = p.Price,                
             });
         }
 
@@ -41,10 +39,8 @@ namespace Catalog.Application.Services
             return new ProductDto
             {
                 Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                Stock = p.Stock
+                Name = p.Name,                
+                Price = p.Price,                
             };
         }
 
