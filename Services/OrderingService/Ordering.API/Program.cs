@@ -1,9 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Interfaces;
 using Ordering.Application.Services;
-using Ordering.Infrastructure.Data;
-using Ordering.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Ordering.Domain.Interfaces;
+using Ordering.Infrastructure.Data;
+using Ordering.Infrastructure.HttpClients;
+using Ordering.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,9 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 //Registering an HttpClient
-builder.Services.AddHttpClient("Catalog", client =>
+builder.Services.AddHttpClient<ICatalogServiceHttpClient, CatalogServiceHttpClient>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5146/api/"); // base URL of CatalogService
+    client.BaseAddress = new Uri("http://localhost:5146/");
 });
 
 
