@@ -15,6 +15,7 @@ builder.Services.AddDbContext<CatalogDbContext>(options =>
 // Dependency Injection
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 
 
 builder.Services.AddControllers();
