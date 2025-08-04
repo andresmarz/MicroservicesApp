@@ -4,24 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-
-
 using Ordering.Application.DTOs;
 using Ordering.Application.Interfaces;
 using Ordering.Domain.Entities;
 using Ordering.Domain.Interfaces;
-using Ordering.Application.DTOs.External;
 
 namespace Ordering.Application.Services
 {
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _repository;
-        
 
         public OrderService(IOrderRepository repository)
         {
@@ -39,7 +31,7 @@ namespace Ordering.Application.Services
                 Quantity = order.Quantity,
                 TotalPrice = order.TotalPrice,
                 OrderDate = order.OrderDate,
-            });             
+            });
         }
 
         public async Task<OrderDto?> GetByIdAsync(Guid id)
@@ -58,12 +50,20 @@ namespace Ordering.Application.Services
             };
         }
 
-       
         public async Task AddAsync(CreateOrderDto dto)
         {
+            var order = new Order
+            {
+                CustomerName = dto.CustomerName,
+                Product = dto.Product,
+                Quantity = dto.Quantity,
+                TotalPrice = dto.TotalPrice,
+            };
+
+            await _repository.AddAsync(order);
         }
 
-        public async Task UpdateAsync(Guid id, OrderDto dto)
+        public async Task UpdateAsync(Guid id, CreateOrderDto dto)
         {
             var order = await _repository.GetByIdAsync(id);
             if (order == null) return;

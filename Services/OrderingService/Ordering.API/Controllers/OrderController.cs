@@ -38,12 +38,12 @@ namespace Ordering.API.Controllers
         public async Task<IActionResult> Create([FromBody] CreateOrderDto dto)
         {
             await _orderService.AddAsync(dto);
-            return CreatedAtAction(nameof(GetAll), null);           
+            return CreatedAtAction(nameof(GetAll), null);
         }
 
         // PUT: api/Order/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] OrderDto dto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] CreateOrderDto dto)
         {
             await _orderService.UpdateAsync(id, dto);
             return NoContent();

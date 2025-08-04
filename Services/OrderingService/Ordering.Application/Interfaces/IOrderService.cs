@@ -7,7 +7,7 @@ namespace Ordering.Application.Interfaces
         Task<IEnumerable<OrderDto>> GetAllAsync();
         Task<OrderDto?> GetByIdAsync(Guid id);
         Task AddAsync(CreateOrderDto dto);
-        Task UpdateAsync(Guid id, OrderDto dto);
+        Task UpdateAsync(Guid id, CreateOrderDto dto);
         Task DeleteAsync(Guid id);
     }
 }
