@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Interfaces;
 using Ordering.Application.Services;
+using Ordering.Application.Services.Orchestration;
 using Ordering.Domain.Interfaces;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.HttpClients;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<OrderingDbContext>(options =>
 // Dependency Injection
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderOrchestrationService, OrderOrchestrationService>();
+
 
 //Registering an HttpClient
 builder.Services.AddHttpClient<ICatalogServiceHttpClient, CatalogServiceHttpClient>(client =>
