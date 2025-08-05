@@ -29,12 +29,13 @@ namespace Ordering.Application.Services.Orchestration
             var order = new Order
             {
                 Id = Guid.NewGuid(),
-                ProductId = productId,
-                ProductName = product.Name,
+                Product = product.Name,         // Usamos 'Product' como nombre
                 Quantity = quantity,
                 TotalPrice = totalPrice,
-                CreatedAt = DateTime.UtcNow
+                CustomerName = "Cliente Genérico", // O luego puedes hacerlo dinámico
+                OrderDate = DateTime.UtcNow     // Ya lo hace por defecto, pero por claridad lo dejamos
             };
+
 
             await _orderRepository.AddAsync(order);
         }
