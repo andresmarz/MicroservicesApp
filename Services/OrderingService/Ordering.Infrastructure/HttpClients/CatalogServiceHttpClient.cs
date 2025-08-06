@@ -17,7 +17,7 @@ namespace Ordering.Infrastructure.HttpClients
 
         public async Task<ProductResponseDto?> GetProductByIdAsync(Guid productId)
         {
-            var response = await _httpClient.GetAsync($"/api/products/{productId}");
+            var response = await _httpClient.GetAsync($"/api/external-product/{productId}");
 
             if (!response.IsSuccessStatusCode)
                 return null;
