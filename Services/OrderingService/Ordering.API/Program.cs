@@ -24,7 +24,7 @@ builder.Services.AddScoped<IOrderOrchestrationService, OrderOrchestrationService
 //Registering an HttpClient
 builder.Services.AddHttpClient<ICatalogServiceHttpClient, CatalogServiceHttpClient>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5146/");
+    client.BaseAddress = new Uri("http://localhost:5003/");
 });
 
 
