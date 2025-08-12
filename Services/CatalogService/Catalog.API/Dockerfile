@@ -11,7 +11,7 @@ COPY ["Catalog.Infrastructure/Catalog.Infrastructure.csproj", "Catalog.Infrastru
 # Restauramos dependencias
 RUN dotnet restore "Catalog.API/Catalog.API.csproj"
 
-# Copiamos todo el código
+# Copiamos todo el código fuente
 COPY . .
 
 # Publicamos en modo Release
@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # Exponemos el puerto donde corre la API
-EXPOSE 5003
+EXPOSE 80
 
 # Comando para arrancar la app
 ENTRYPOINT ["dotnet", "Catalog.API.dll"]
