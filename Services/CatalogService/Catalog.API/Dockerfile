@@ -4,9 +4,10 @@ WORKDIR /src
 
 # Copiamos los archivos del proyecto (puede variar si quieres copiar solo los necesarios)
 COPY ["Catalog.API/Catalog.API.csproj", "Catalog.API/"]
-COPY ["Catalog.Application/Catalog.Application.csproj", "Catalog.Application/"]
-COPY ["Catalog.Domain/Catalog.Domain.csproj", "Catalog.Domain/"]
-COPY ["Catalog.Infrastructure/Catalog.Infrastructure.csproj", "Catalog.Infrastructure/"]
+COPY ["../Catalog.Application/Catalog.Application.csproj", "Catalog.Application/"]
+COPY ["../Catalog.Domain/Catalog.Domain.csproj", "Catalog.Domain/"]
+COPY ["../Catalog.Infrastructure/Catalog.Infrastructure.csproj", "Catalog.Infrastructure/"]
+
 
 # Restauramos dependencias
 RUN dotnet restore "Catalog.API/Catalog.API.csproj"
