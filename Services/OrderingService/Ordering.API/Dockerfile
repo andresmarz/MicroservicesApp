@@ -2,9 +2,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY ["Ordering.API/Ordering.API.csproj", "Ordering.API/"]
-COPY ["Ordering.Application/Ordering.Application.csproj", "Ordering.Application/"]
-COPY ["Ordering.Domain/Ordering.Domain.csproj", "Ordering.Domain/"]
-COPY ["Ordering.Infrastructure/Ordering.Infrastructure.csproj", "Ordering.Infrastructure/"]
+COPY ["../Ordering.Application/Ordering.Application.csproj", "Ordering.Application/"]
+COPY ["../Ordering.Domain/Ordering.Domain.csproj", "Ordering.Domain/"]
+COPY ["../Ordering.Infrastructure/Ordering.Infrastructure.csproj", "Ordering.Infrastructure/"]
 
 RUN dotnet restore "Ordering.API/Ordering.API.csproj"
 
