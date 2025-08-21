@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -11,12 +9,10 @@ services:
       - "1435:1433"
     networks:
       - micro_net
-    volumes:
-      - sql_data:/var/opt/mssql
 
-  catalog.api:
+  catalog_api:
     build:
-      context: ./Services/CatalogService/Catalog.API
+      context: ./Services/CatalogService/
       dockerfile: Dockerfile
     container_name: catalog_api_container
     ports:
@@ -29,9 +25,9 @@ services:
     networks:
       - micro_net
 
-  ordering.api:
+  ordering_api:
     build:
-      context: ./Services/OrderingService/Ordering.API
+      context: ./Services/OrderingService/
       dockerfile: Dockerfile
     container_name: ordering_api_container
     ports:
@@ -39,15 +35,13 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=OrderingDb;User Id=sa;Password=MyStrong!Passw0rd1;TrustServerCertificate=True
-      - CatalogService__BaseUrl=http://catalog.api:80
+      - CatalogService__BaseUrl=http://catalog_api_container:80
     depends_on:
       - sqlserver
-      - catalog.api
+      - catalog_api
     networks:
       - micro_net
 
 networks:
   micro_net:
-
-volumes:
-  sql_data:
+    driver: bridge
