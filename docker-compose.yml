@@ -9,6 +9,8 @@ services:
       - "1435:1433"
     networks:
       - micro_net
+    volumes:
+      - sqlserver_data:/var/opt/mssql   # Persistent Volume mount
 
   catalog_api:
     build:
@@ -46,3 +48,5 @@ networks:
   micro_net:
     driver: bridge
 
+volumes:
+  sqlserver_data:   # Defining the volume

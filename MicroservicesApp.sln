@@ -11,6 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CatalogService", "CatalogSe
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderingService", "OrderingService", "{31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}"
+	ProjectSection(SolutionItems) = preProject
+		Services\OrderingService\Dockerfile = Services\OrderingService\Dockerfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{14D22C39-E63E-46EE-AF4F-375342577B22}"
 EndProject
