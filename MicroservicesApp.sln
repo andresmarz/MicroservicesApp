@@ -48,6 +48,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{30F9EE68-D072-4254-A483-E5E3E264590A}"
+	ProjectSection(SolutionItems) = preProject
+		BuildingBlocks\EventBus\Contracts\OrderSubmitted.cs = BuildingBlocks\EventBus\Contracts\OrderSubmitted.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +109,7 @@ Global
 		{BDF51999-8BF2-4867-8BB7-F0F8F8871513} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
 		{C7AB4B3C-52C9-4BF5-91B2-D9773066286F} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
 		{20619D71-6672-425E-8325-CFEB67280613} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
+		{30F9EE68-D072-4254-A483-E5E3E264590A} = {2581DC17-753E-4A27-BE7E-FE0EB2967060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0758D572-7456-4260-82E2-9BBC1278F24A}
