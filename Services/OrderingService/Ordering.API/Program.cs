@@ -6,8 +6,15 @@ using Ordering.Domain.Interfaces;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.HttpClients;
 using Ordering.Infrastructure.Repositories;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 1) Leer config de Rabbit desde variables/env/appsettings
+var rabbitHost = builder.Configuration["RabbitMq:Host"] ?? builder.Configuration["RabbitMq__Host"] ?? "rabbitmq";
+var rabbitUser = builder.Configuration["RabbitMq:Username"] ?? builder.Configuration["RabbitMq__Username"] ?? "guest";
+var rabbitPass = builder.Configuration["RabbitMq:Password"] ?? builder.Configuration["RabbitMq__Password"] ?? "guest";
+
 
 // Add services to the container.
 // Configure EF Core
