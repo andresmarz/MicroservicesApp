@@ -15,6 +15,25 @@ var rabbitHost = builder.Configuration["RabbitMq:Host"] ?? builder.Configuration
 var rabbitUser = builder.Configuration["RabbitMq:Username"] ?? builder.Configuration["RabbitMq__Username"] ?? "guest";
 var rabbitPass = builder.Configuration["RabbitMq:Password"] ?? builder.Configuration["RabbitMq__Password"] ?? "guest";
 
+// 2) Registrar MassTransit + consumidor
+builder.Services.AddMassTransit(x =>
+{
+    // 3) Registramos el consumer
+    x.AddConsumer<OrderSubmittedConsumer>();
+
+    // 4) Configuración del transporte
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitHost, "/", h =>
+        {
+            h.Username(rabbitUser);
+            h.Password(rabbitPass);
+        });
+
+        // 5) Crea/Configura la cola para OrderSubmittedConsumer automáticamente
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 // Add services to the container.
 // Configure EF Core
