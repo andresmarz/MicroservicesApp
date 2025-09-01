@@ -79,4 +79,34 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+
+app.MapPost("/api/orders", async (
+    /* tus dependencias actuales, por ejemplo: */
+    OrderingDbContext db,
+    MassTransit.IPublishEndpoint publisher, // 6) MassTransit publisher para publicar eventos
+    OrderDto req // tu DTO
+) =>
+{
+    // 7) lógica actual de crear order (validar, consultar producto, etc.)
+    var order = new Order
+    {
+        Id = Guid.NewGuid(),
+        ProductId = req.ProductId,
+        Quantity = req.Quantity,
+        UnitPrice = req.UnitPrice, // o el precio obtenido del Catalog
+        TotalPrice = req.UnitPrice * req.Quantity,
+        CreatedAt = DateTime.UtcNow
+    };
+
+    db.Orders.Add(order);
+    await db.SaveChangesAsync();
+
+    // 8) Publicar el evento asíncrono
+    await publisher.Publish(new OrderSubmitted(order.Id, order.ProductId, order.Quantity, order.UnitPrice));
+
+    return Results.Created($"/api/orders/{order.Id}", new { order.Id });
+});
+
+
 app.Run();
