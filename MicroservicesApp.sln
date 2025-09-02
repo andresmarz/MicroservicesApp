@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "BuildingBlocks\EventBus\EventBus.csproj", "{676C3221-1966-448E-B416-475A8C02D352}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{20619D71-6672-425E-8325-CFEB67280613}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20619D71-6672-425E-8325-CFEB67280613}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20619D71-6672-425E-8325-CFEB67280613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{676C3221-1966-448E-B416-475A8C02D352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676C3221-1966-448E-B416-475A8C02D352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676C3221-1966-448E-B416-475A8C02D352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676C3221-1966-448E-B416-475A8C02D352}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{BDF51999-8BF2-4867-8BB7-F0F8F8871513} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
 		{C7AB4B3C-52C9-4BF5-91B2-D9773066286F} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
 		{20619D71-6672-425E-8325-CFEB67280613} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
+		{676C3221-1966-448E-B416-475A8C02D352} = {14D22C39-E63E-46EE-AF4F-375342577B22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0758D572-7456-4260-82E2-9BBC1278F24A}
