@@ -1,4 +1,4 @@
-namespace BuildingBlocks.EventBus.Contracts;
+namespace EventBus.Contracts;
 
 public record OrderSubmitted(
     Guid OrderId,
