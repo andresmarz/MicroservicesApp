@@ -7,6 +7,7 @@ using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.HttpClients;
 using Ordering.Infrastructure.Repositories;
 using MassTransit;
+using EventBus.Contracts;
 using Catalog.API.Consumers;   // ?? Para que reconozca OrderSubmittedConsumer
 
 

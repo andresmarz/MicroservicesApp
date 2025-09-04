@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBus.Contracts
-{
+namespace EventBus.Contracts;
+
     public record OrderSubmitted(
     Guid OrderId,
     Guid ProductId,
@@ -13,4 +13,3 @@ namespace EventBus.Contracts
     decimal UnitPrice
 );
 
-}

@@ -3,8 +3,19 @@ using Catalog.Application.Services;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using MassTransit;
+using EventBus.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//RabbitMQ part
+// 1) Leer config de Rabbit desde variables/env/appsettings
+var rabbitHost = builder.Configuration["RabbitMq:Host"] ?? builder.Configuration["RabbitMq__Host"] ?? "rabbitmq";
+var rabbitUser = builder.Configuration["RabbitMq:Username"] ?? builder.Configuration["RabbitMq__Username"] ?? "guest";
+var rabbitPass = builder.Configuration["RabbitMq:Password"] ?? builder.Configuration["RabbitMq__Password"] ?? "guest";
+
+
+
 
 // Add services to the container.
 // Configure EF Core
