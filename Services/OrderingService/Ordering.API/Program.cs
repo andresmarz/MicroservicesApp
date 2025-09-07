@@ -1,15 +1,16 @@
+using EventBus.Contracts;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Ordering.Application.DTOs;
+using Ordering.Application.DTOs.External;
 using Ordering.Application.Interfaces;
 using Ordering.Application.Services;
 using Ordering.Application.Services.Orchestration;
+using Ordering.Domain.Entities;
 using Ordering.Domain.Interfaces;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.HttpClients;
 using Ordering.Infrastructure.Repositories;
-using MassTransit;
-using EventBus.Contracts;
-using Catalog.API.Consumers;   // ?? Para que reconozca OrderSubmittedConsumer
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +22,7 @@ var rabbitPass = builder.Configuration["RabbitMq:Password"] ?? builder.Configura
 // 2) Registrar MassTransit + consumidor
 builder.Services.AddMassTransit(x =>
 {
-    // 3) Registramos el consumer
-    x.AddConsumer<OrderSubmittedConsumer>();
-
+    
     // 4) Configuración del transporte
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -83,33 +82,55 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-
-app.MapPost("/api/orders", async (
-    /* tus dependencias actuales, por ejemplo: */
+app.MapPost("/api/orders/create-from-catalog/{productId:guid}", async (
+    Guid productId,
+    int quantity,                                  // viene por query ?quantity=2
     OrderingDbContext db,
-    MassTransit.IPublishEndpoint publisher, // 6) MassTransit publisher para publicar eventos
-    OrderDto req // tu DTO
+    ICatalogServiceHttpClient catalogClient,
+    MassTransit.IPublishEndpoint publisher
 ) =>
 {
-    // 7) lógica actual de crear order (validar, consultar producto, etc.)
+    // 1) Consultar el producto en Catalog
+    var product = await catalogClient.GetProductByIdAsync(productId);
+    if (product is null)
+        return Results.NotFound("Producto no encontrado en Catalog");
+
+    // 2) Crear la entidad Order (tu modelo actual)
     var order = new Order
     {
         Id = Guid.NewGuid(),
-        ProductId = req.ProductId,
-        Quantity = req.Quantity,
-        UnitPrice = req.UnitPrice, // o el precio obtenido del Catalog
-        TotalPrice = req.UnitPrice * req.Quantity,
-        CreatedAt = DateTime.UtcNow
+        CustomerName = "Anon",                     // pon aquí si luego quieres leerlo del body
+        Product = product.Name,                    // tu entidad guarda el nombre, no el Id
+        Quantity = quantity,
+        TotalPrice = product.Price * quantity,
+        OrderDate = DateTime.UtcNow
     };
 
     db.Orders.Add(order);
     await db.SaveChangesAsync();
 
-    // 8) Publicar el evento asíncrono
-    await publisher.Publish(new OrderSubmitted(order.Id, order.ProductId, order.Quantity, order.UnitPrice));
+    // 3) Publicar evento asíncrono (aquí sí usamos el Id y Price del producto)
+    await publisher.Publish(new OrderSubmitted(
+        order.Id,
+        product.Id,                                // <- Id del Catalog
+        order.Quantity,
+        product.Price
+    ));
 
-    return Results.Created($"/api/orders/{order.Id}", new { order.Id });
+    // 4) Devolver respuesta (puedes usar tu OrderDto si quieres)
+    var response = new
+    {
+        order.Id,
+        order.CustomerName,
+        Product = order.Product,
+        order.Quantity,
+        order.TotalPrice,
+        order.OrderDate
+    };
+
+    return Results.Created($"/api/orders/{order.Id}", response);
 });
+
 
 
 app.Run();
