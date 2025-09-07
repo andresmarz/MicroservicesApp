@@ -6,6 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using EventBus.Contracts;
 
+using MassTransit;
+using Microsoft.EntityFrameworkCore;
+using Catalog.Infrastructure.Data;          // tu DbContext
+using Catalog.API.Consumers;              // el consumer que crearemos
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 //RabbitMQ part
