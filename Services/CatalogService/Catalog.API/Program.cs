@@ -29,6 +29,31 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<CatalogDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+
+// ---- MassTransit: registramos el consumer y el bus RabbitMQ
+builder.Services.AddMassTransit(x =>
+{
+    // registramos el consumer concreto
+    x.AddConsumer<OrderSubmittedConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitHost, "/", h =>
+        {
+            h.Username(rabbitUser);
+            h.Password(rabbitPass);
+        });
+
+        // Cola/endpoint donde Catalog escuchará OrderSubmitted
+        cfg.ReceiveEndpoint("order-submitted-queue", e =>
+        {
+            e.ConfigureConsumer<OrderSubmittedConsumer>(context);
+        });
+    });
+});
+
+
+
 // Dependency Injection
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();

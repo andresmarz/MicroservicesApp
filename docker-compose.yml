@@ -26,7 +26,7 @@ services:
       - RabbitMq__Password=guest
     depends_on:
       - sqlserver
-      - rabbitmq   # espera a que el broker esté arriba
+      - rabbitmq   # espera a que el broker estÃ© arriba
     networks:
       - micro_net
 
@@ -47,16 +47,16 @@ services:
     depends_on:
       - sqlserver
       - catalog_api
-      - rabbitmq   # ordering también necesita el broker
+      - rabbitmq   # ordering tambiÃ©n necesita el broker
     networks:
       - micro_net
 
   rabbitmq:
-    image: rabbitmq:3.13-management   # imagen con UI de administración
+    image: rabbitmq:3.13-management   # imagen con UI de administraciÃ³n
     container_name: rabbitmq
     ports:
       - "5672:5672"    # puerto AMQP para apps
-      - "15672:15672"  # UI de administración en http://localhost:15672 (guest/guest)
+      - "15672:15672"  # UI de administraciÃ³n en http://localhost:15672 (guest/guest)
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
