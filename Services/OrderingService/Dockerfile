@@ -7,7 +7,6 @@ COPY ["Ordering.API/Ordering.API.csproj", "Ordering.API/"]
 COPY ["Ordering.Application/Ordering.Application.csproj", "Ordering.Application/"]
 COPY ["Ordering.Domain/Ordering.Domain.csproj", "Ordering.Domain/"]
 COPY ["Ordering.Infrastructure/Ordering.Infrastructure.csproj", "Ordering.Infrastructure/"]
-COPY ["Ordering.API/EventBus/EventBus.csproj", "Ordering.API/EventBus/"]
 
 
 # Restaurar dependencias
