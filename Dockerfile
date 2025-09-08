@@ -7,7 +7,7 @@ COPY ["Catalog.API/Catalog.API.csproj", "Catalog.API/"]
 COPY ["Catalog.Application/Catalog.Application.csproj", "Catalog.Application/"]
 COPY ["Catalog.Domain/Catalog.Domain.csproj", "Catalog.Domain/"]
 COPY ["Catalog.Infrastructure/Catalog.Infrastructure.csproj", "Catalog.Infrastructure/"]
-COPY ["BuildingBlocks/EventBus/EventBus.csproj", "BuildingBlocks/EventBus/"]
+COPY ["Catalog.API/EventBus/EventBus.csproj", "Catalog.API/EventBus/"]
 
 
 # Restaurar dependencias
