@@ -13,3 +13,4 @@ namespace Catalog.API.Events;
     decimal UnitPrice
 );
 
+
