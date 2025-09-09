@@ -1,4 +1,4 @@
-using EventBus.Contracts;
+using Ordering.API.Events;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.DTOs;

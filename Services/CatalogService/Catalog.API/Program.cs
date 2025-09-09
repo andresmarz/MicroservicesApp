@@ -4,7 +4,7 @@ using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MassTransit;
-using EventBus.Contracts;
+using Catalog.API.Events;
 
 using MassTransit;
 using Microsoft.EntityFrameworkCore;

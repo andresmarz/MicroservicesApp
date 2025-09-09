@@ -1,4 +1,4 @@
-﻿using EventBus.Contracts;   // 🔹 Aquí usas el contrato
+﻿using Catalog.API.Events;   // 🔹 Aquí usas el contrato
 using MassTransit;
 
 namespace Catalog.API.Consumers;
